@@ -1,6 +1,4 @@
-print("Welcome to Chess Leader Board: ")
-print("-"*40)
-
+# Players Dummy Data 
 players = {
     "Umesh Sharma": 520,
     "Maya Lin": 585,
@@ -23,3 +21,113 @@ players = {
     "Vikram Rao": 1875,
     "Claire Vance": 1980,    
 }
+
+def challenge():
+    print("\n" + "-"*40)
+    print("WELCOME TO CHALLENGE MODE:")
+    print("-"*40)
+    print("NOTE: You can Challenge only the player \nwhose rating is more than yours.")
+
+    # Check if both the players are available in the player dictionary
+    while True:
+
+        # take the player and challenger name by the player who is challenging
+        challenger = input("\nEnter you name (Challenger): ")
+        defender = input("Enter the player name you want to challenge (Defender): ")
+        
+        # Checks if the players are there in Dummy players dictionary
+        if challenger in players and defender in players:
+
+            # Check is the the challenger rating is less than defender rating
+            if players[defender] > players[challenger]:
+                print("\nCHALLENGE ACCEPTER.")
+                
+                # Display Both Challenger's and Defender's Rating before the Challenge Game
+                print(f"\nChallenger Rating Before challenge game: {players[challenger]}")
+                print(f"Defender Rating Before challenge game: {players[defender]}")
+                
+                while True:
+                    # Main challenge logic which determines the players ratings
+                    game_result = input("\nPlease Enter the Game Result: ")
+                  
+                    if game_result in ["Win", "win", "Won", "won", "w", "W", 1, True]:
+                        print("\nThe Challenger has won the game.")
+                        players[challenger] += 10
+                        players[defender] -= 10
+    
+                        # Display Both Challenger's and Defender's Rating after the Challenge Game
+                        print(f"\nChallenger Rating After challenge game: {players[challenger]}")
+                        print(f"Defender Rating After challenge game: {players[defender]}")
+                        break
+    
+                    elif game_result in ["Loss", "loss", "lost", "Lost", "l", "L", 0, False]:
+                        print("\nThe Defender has won the game.")
+                        players[challenger] -= 10
+                        players[defender] += 10
+                    
+                        # Display Both Challenger's and Defender's Rating after the Challenge Game
+                        print(f"\nChallenger Rating After challenge game: {players[challenger]}")
+                        print(f"Defender Rating After challenge game: {players[defender]}")
+                        break
+    
+                    elif game_result in ["Draw", "draw", "d", "D"]:
+                        print("\nGame has resulted in a draw. No changes in player ratings.")
+                    
+                        # Display Both Challenger's and Defender's Rating after the Challenge Game
+                        print(f"\nChallenger Rating After challenge game: {players[challenger]}")
+                        print(f"Defender Rating After challenge game: {players[defender]}")
+                        break
+                    
+                    else:
+                        print("ERROR: Invalid Game Result.")
+                        continue
+                break  
+    
+            else:
+                print("\nCHALLENGE DENIED.")
+                print("Please challenge a player whose rating is greater than yours.")
+                continue
+                
+              
+        else:
+            print(f"\nPlayer '{challenger}' or '{defender}' doesn't exits, please try again")
+            continue            
+  
+
+# Leader Board Display 
+def leaderBoard(players):
+    if len(players) < 1:
+        print("No Players to display")
+    else:
+        print("\n" + "-"*45)
+        print(f"{' ' * 2}Current Leader Board")
+        print("-"*45)
+        print(f"{' ' * 2}{'Rank':<8} | {'Player Name':<20} | {'Rating':<10}")
+        print("-"*45)
+        
+        sorted_players = sorted(players.items(), key=lambda x: x[1], reverse=True)
+        
+        for position, (name, elo) in enumerate(sorted_players, start=1):
+            print(f"{' ' * 2}{position:<8} | {name:<20} | {elo:<10}")
+
+
+print("-"*40)
+print("Welcome to Chess Leaderboard")
+print("-"*40)
+print("1. View Dashboard")
+print("2. Enter Challenge Mode: ")
+print("0. Exit the Application")
+valid_choices = ["1","2","0"]
+while True:
+    choice = input("\nPlease enter you choice: ")
+    if choice in valid_choices and choice == "0":
+        print("Exiting the program...")
+        break
+    if choice in valid_choices and choice == "1":
+        leaderBoard(players)
+        continue
+    elif choice in valid_choices and choice == "2":
+        challenge()
+    elif choice not in valid_choices:
+        print("Invalid Choice. Please Try Again.")
+        continue
