@@ -19,7 +19,9 @@ players = {
     "Daniel Sato": 1620,
     "Isabella Cruz": 1745,
     "Vikram Rao": 1875,
-    "Claire Vance": 1980,    
+    "Claire Vance": 1980,   
+    "Gukesh D": 813,
+    "Magnus Carlsen": 805
 }
 
 def challenge():
@@ -45,7 +47,7 @@ def challenge():
 
             # Check is the the challenger rating is less than defender rating
             if players[defender] > players[challenger]:
-                print("\nCHALLENGE ACCEPTER.")
+                print("\nCHALLENGE ACCEPTED.")
                 
                 # Display Both Challenger's and Defender's Rating before the Challenge Game
                 print(f"\nChallenger Rating Before challenge game: {players[challenger]}")
@@ -55,19 +57,19 @@ def challenge():
                     # Main challenge logic which determines the players ratings
                     game_result = input("\nPlease Enter the Game Result: ").strip().lower()
                   
-                    if game_result in ["Win", "w"]:
+                    if game_result in ["win", "w"]:
                         print("\nThe Challenger has won the game.")
                         players[challenger] += 10
                         players[defender] -= 10
     
     
-                    elif game_result in ["Loss", "l"]:
+                    elif game_result in ["loss", "l"]:
                         print("\nThe Defender has won the game.")
                         players[challenger] -= 10
                         players[defender] += 10
                     
     
-                    elif game_result in ["Draw", "d"]:
+                    elif game_result in ["draw", "d"]:
                         print("\nGame has resulted in a draw. No changes in player ratings.")
                     
                     
@@ -118,8 +120,8 @@ def leaderBoard(players):
 print("-"*40)
 print("Welcome to Chess Leaderboard")
 print("-"*40)
-print("1. View Dashboard")
-print("2. Enter Challenge Mode ")
+print("1. View Leader Board")
+print("2. Enter Challenge Mode")
 print("0. Exit the Application")
 
 while True:
